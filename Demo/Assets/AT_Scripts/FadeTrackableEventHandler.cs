@@ -28,6 +28,7 @@ namespace Vuforia
         private TrackableBehaviour mTrackableBehaviour;
         private int firstLoss = 0;
         private GameObject bracketCanvas;
+        private GameObject gameCanvas;
 
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -38,6 +39,7 @@ namespace Vuforia
         void Awake()
         {
             bracketCanvas = GameObject.FindGameObjectWithTag("BracketUICanvas");
+            gameCanvas = GameObject.FindGameObjectWithTag("GameUICanvas");
         }
 
         void Start()
@@ -84,23 +86,9 @@ namespace Vuforia
         {
             Time.timeScale = 1f;
             bracketCanvas.SetActive(false);
+            gameCanvas.SetActive(true);
             StopAllCoroutines();
             StartCoroutine(Fade(1f));
-
-            /*Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
-            Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
-
-            // Enable rendering:
-            foreach (Renderer component in rendererComponents)
-            {
-                component.enabled = true;
-            }
-
-            // Enable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = true;
-            }*/
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
@@ -117,23 +105,9 @@ namespace Vuforia
                 Time.timeScale = 0f;
             }
             bracketCanvas.SetActive(true);
+            gameCanvas.SetActive(false);
             StopAllCoroutines();
             StartCoroutine(Fade(0f));
-
-            /*Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
-            Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
-
-            // Disable rendering:
-            foreach (Renderer component in rendererComponents)
-            {
-                component.enabled = false;
-            }
-
-            // Disable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = false;
-            }*/
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
