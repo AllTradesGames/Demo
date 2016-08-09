@@ -3,11 +3,12 @@ using System.Collections;
 
 public class BallControl : MonoBehaviour
 {
+    public Vector3 startPosition;
 
 	// Use this for initialization
 	void Start()
     {
-	
+        transform.localPosition = startPosition;
 	}
 	
 
@@ -22,8 +23,9 @@ public class BallControl : MonoBehaviour
     {
         switch(coll.gameObject.tag)
         {
-            case "test":
-                Debug.Log("Test");
+            case "Reset":
+                LauncherControl.launchable = true;
+                Debug.Log("Reset");
                 break;
 
         }
