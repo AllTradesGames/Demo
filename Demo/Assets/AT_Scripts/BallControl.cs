@@ -27,6 +27,9 @@ public class BallControl : MonoBehaviour
                 LauncherControl.launchable = true;
                 Debug.Log("Reset");
                 break;
+            case "Pocket":
+                coll.gameObject.GetComponent<PocketControl>().CaughtBall();
+                break;
 
         }
     }
