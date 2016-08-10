@@ -36,8 +36,9 @@ public class BallControl : MonoBehaviour
     {
         switch (other.tag)
         {
-            case "test":
-                Debug.Log("Test");
+            case "Gutter":
+                transform.localPosition = startPosition;
+                Debug.Log("Gutter");
                 break;
 
         }
