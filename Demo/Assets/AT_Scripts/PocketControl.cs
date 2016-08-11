@@ -36,9 +36,12 @@ public class PocketControl : MonoBehaviour
 
     public virtual void CaughtBall()
     {
-        caughtTime = Time.time;
-        holding = true;
-        Debug.Log("CaughtBall()");
+        if (!holding)
+        {
+            caughtTime = Time.time;
+            holding = true;
+            Debug.Log("CaughtBall()");
+        }        
     }
 
 

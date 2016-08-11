@@ -25,11 +25,31 @@ public class BallControl : MonoBehaviour
         {
             case "Reset":
                 LauncherControl.launchable = true;
-                Debug.Log("Reset");
+                GameObject.FindGameObjectWithTag("LaunchBlock").GetComponent<EdgeCollider2D>().enabled = false;
                 break;
             case "Pocket":
                 coll.gameObject.GetComponent<PocketControl>().CaughtBall();
                 break;
+
+        }
+    }
+
+
+    void OnCollisionStay2D(Collision2D coll)
+    {
+        switch (coll.gameObject.tag)
+        {            
+            case "Pocket":
+                coll.gameObject.GetComponent<PocketControl>().CaughtBall();
+                break;
+        }
+    }
+
+
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        switch (coll.gameObject.tag)
+        {
 
         }
     }
@@ -42,6 +62,9 @@ public class BallControl : MonoBehaviour
             case "Gutter":
                 transform.localPosition = startPosition;
                 Debug.Log("Gutter");
+                break;
+            case "LaunchBlock":
+                other.GetComponent<EdgeCollider2D>().enabled = true;
                 break;
 
         }
