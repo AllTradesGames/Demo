@@ -6,9 +6,10 @@ public class PocketControl : MonoBehaviour
     public float holdTime;
     public float cooldownTime;
 
-    public float caughtTime = 0f;
-    private float releaseTime = 0f;
-    public bool holding = false;
+    protected float caughtTime = 0f;
+    protected bool holding = false;
+
+    private float releaseTime = 0f;    
     private AreaEffector2D eff;
 
 	// Use this for initialization
