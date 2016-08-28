@@ -5,6 +5,7 @@ public class BallControl : MonoBehaviour
 {
 
     private GameController gc;
+    private bool blocked = false;
 
 	// Use this for initialization
 	void Start()
@@ -33,6 +34,7 @@ public class BallControl : MonoBehaviour
             case "Reset":
                 LauncherControl.launchable = true;
                 GameObject.FindGameObjectWithTag("LaunchBlock").GetComponent<EdgeCollider2D>().enabled = false;
+                blocked = false;
                 break;
             case "Pocket":
                 coll.gameObject.GetComponent<PocketControl>().CaughtBall();
@@ -70,7 +72,12 @@ public class BallControl : MonoBehaviour
                 GameController.Gutter();
                 break;
             case "LaunchBlock":
-                other.GetComponent<EdgeCollider2D>().enabled = true;
+                if (!blocked)
+                {
+                    other.GetComponent<EdgeCollider2D>().enabled = true;
+                    GameController.ActivateBallSaver();
+                    blocked = true;
+                }
                 break;
 
         }

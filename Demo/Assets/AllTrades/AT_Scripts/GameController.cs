@@ -31,21 +31,37 @@ public class GameController : MonoBehaviour
 
     private static GameObject player;
     private static Vector3 ballStartPosition = new Vector3(1.81f, 0f, 0f);
+
     private static bool saver = false;
     private static float ballSaverDuration = 30f;
     private static float saverStartTime = 0f;
+
+    private static SpriteMessageControl message;
+    private static SpriteMessageControl scoreMessage;
+    private static SpriteMessageControl highScoreMessage;
+
 
 
     // Use this for initialization
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Ball");
-        if(PlayerPrefs.HasKey("HighScore"))
+        message = GameObject.FindGameObjectWithTag("Message").GetComponent<SpriteMessageControl>();
+        scoreMessage = GameObject.FindGameObjectWithTag("ScoreMessage").GetComponent<SpriteMessageControl>();
+        highScoreMessage = GameObject.FindGameObjectWithTag("HighScoreMessage").GetComponent<SpriteMessageControl>();
+
+        if (PlayerPrefs.HasKey("HighScore"))
         {
             highScore = PlayerPrefs.GetInt("HighScore");
         }
+        else
+        {
+            highScore = 0;
+        }
 
-        ActivateBallSaver();
+        highScoreMessage.SetMessage("High Score: "+highScore);
+        scoreMessage.SetMessage("Your Score: " + score);
+        message.SetMessage("Press and Hold to Launch!");
     }
 
 
@@ -58,14 +74,13 @@ public class GameController : MonoBehaviour
     public static void AddScore(int inputScore)
     {
         score += inputScore;
-        if(score > highScore)
+        scoreMessage.SetMessage("Your Score: " + score);
+        if (score > highScore)
         {
             highScore = score;
             PlayerPrefs.SetInt("HighScore", highScore);
-            Debug.Log("HighScore set: " + highScore);
+            highScoreMessage.SetMessage("High Score: " + highScore);
         }
-
-        Debug.Log("Score: "+score);
     }
 
 
@@ -79,17 +94,16 @@ public class GameController : MonoBehaviour
         else
         {
             lives--;
-            Debug.Log("Gutter, lives: " + lives);
+            message.SetMessage("Oh No! Lives: " + lives);
 
             if (lives > 0)
             {
                 player.transform.localPosition = ballStartPosition;
                 // TODO Call to update GUIManager's lives
-                ActivateBallSaver();
             }
             else
             {
-                Debug.Log("Game Over");
+                message.SetMessage("Game Over");
             }
         }           
     }
@@ -101,6 +115,7 @@ public class GameController : MonoBehaviour
         saver = true;
         // TODO update saver in GUIManager
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().StartCoroutine("SaverTimer");
+        message.SetMessage("Ball Saver Activated");
     }
 
 
@@ -112,7 +127,7 @@ public class GameController : MonoBehaviour
         }
         saver = false;
         // TODO update saver in GUIManager
-        Debug.Log("Ball Saver Ended");
+        message.SetMessage("Ball Saver Ended");
     }
 
 
