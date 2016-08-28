@@ -62,13 +62,14 @@ public class GameController : MonoBehaviour
         highScoreMessage.SetMessage("High Score: "+highScore);
         scoreMessage.SetMessage("Your Score: " + score);
         message.SetMessage("Press and Hold to Launch!");
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("timescale: "+Time.timeScale);
     }
 
     public static void AddScore(int inputScore)

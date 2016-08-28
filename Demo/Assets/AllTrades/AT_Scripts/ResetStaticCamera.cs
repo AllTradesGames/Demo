@@ -37,6 +37,8 @@ public class ResetStaticCamera : MonoBehaviour
 
             Camera.main.targetTexture = gameTexture;
 
+            Time.timeScale = 0f;
+
             set = true;
         }
     }

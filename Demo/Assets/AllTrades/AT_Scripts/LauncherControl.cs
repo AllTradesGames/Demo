@@ -10,6 +10,7 @@ public class LauncherControl : MonoBehaviour
     public Rigidbody2D ball;
 
     private float currentForce = 0f;
+    private bool touchedLastFrame = false;
 
 	// Use this for initialization
 	void Start ()
@@ -20,13 +21,14 @@ public class LauncherControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetButton("Submit") && (currentForce < forceCap))
+        if ((InputControl.leftTouched||InputControl.rightTouched) && (currentForce < forceCap))
         {
             // Increase launch force while charging
+            touchedLastFrame = true;
             currentForce += forcePerSec * Time.deltaTime;
             //Debug.Log(currentForce);
         }
-        else if(Input.GetButtonUp("Submit"))
+        else if((!InputControl.leftTouched && !InputControl.rightTouched) && touchedLastFrame)
         {
             // Apply launch force to Ball
             if (launchable)
@@ -36,6 +38,7 @@ public class LauncherControl : MonoBehaviour
             }
 
             currentForce = 0f;
+            touchedLastFrame = false;
         }
 	}
 

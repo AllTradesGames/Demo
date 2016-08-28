@@ -22,7 +22,7 @@ public class FlipperControl : MonoBehaviour
     {        
         if (left)
         {
-            if (Input.GetKey("left"))
+            if (InputControl.leftTouched)
             {
                 if ((rb.rotation % 360) < maxAngle)
                 {
@@ -50,7 +50,7 @@ public class FlipperControl : MonoBehaviour
         }
         else
         {
-            if(Input.GetKey("right"))
+            if(InputControl.rightTouched)
             {
                 if ((rb.rotation % 360) > maxAngle)
                 {
