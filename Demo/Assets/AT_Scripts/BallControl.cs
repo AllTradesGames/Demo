@@ -3,12 +3,13 @@ using System.Collections;
 
 public class BallControl : MonoBehaviour
 {
-    public Vector3 startPosition;
+
+    private GameController gc;
 
 	// Use this for initialization
 	void Start()
     {
-        transform.localPosition = startPosition;
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 	
 
@@ -21,6 +22,12 @@ public class BallControl : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+
+        if(coll.gameObject.GetComponent<IScoreable>()!=null)
+        {
+            coll.gameObject.GetComponent<IScoreable>().AddScore();
+        }
+
         switch(coll.gameObject.tag)
         {
             case "Reset":
@@ -60,8 +67,7 @@ public class BallControl : MonoBehaviour
         switch (other.tag)
         {
             case "Gutter":
-                transform.localPosition = startPosition;
-                Debug.Log("Gutter");
+                GameController.Gutter();
                 break;
             case "LaunchBlock":
                 other.GetComponent<EdgeCollider2D>().enabled = true;

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PocketControl : MonoBehaviour
+public class PocketControl : MonoBehaviour, IScoreable
 {
+    public int scoreValue = 0;
     public float holdTime;
     public float cooldownTime;
 
@@ -43,6 +44,13 @@ public class PocketControl : MonoBehaviour
             holding = true;
             Debug.Log("CaughtBall()");
         }        
+    }
+
+
+    // Required for IScoreable Interface
+    public void AddScore()
+    {
+        GameController.AddScore(scoreValue);
     }
 
 

@@ -13,6 +13,7 @@ public class LeftPocket : PocketControl
             Debug.Log("Left Pocket CaughtBall()");
 
             // TODO Left Pocket Game Mechanics Go Here
+
         }
     }
 }

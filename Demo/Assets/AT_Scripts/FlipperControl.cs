@@ -18,7 +18,6 @@ public class FlipperControl : MonoBehaviour
         rb.centerOfMass = centerOfMass;
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate ()
     {        
         if (left)
