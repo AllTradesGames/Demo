@@ -104,6 +104,7 @@ namespace Vuforia
             {
                 Time.timeScale = 0f;
             }
+            CameraDevice.Instance.SetFocusMode(CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
             bracketCanvas.SetActive(true);
             gameCanvas.SetActive(false);
             StopAllCoroutines();
