@@ -29,6 +29,7 @@ namespace Vuforia
         private int firstLoss = 0;
         private GameObject bracketCanvas;
         private GameObject gameCanvas;
+        private ResetStaticCamera staticCamScript;
 
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -40,6 +41,7 @@ namespace Vuforia
         {
             bracketCanvas = GameObject.FindGameObjectWithTag("BracketUICanvas");
             gameCanvas = GameObject.FindGameObjectWithTag("GameUICanvas");
+            staticCamScript = GameObject.FindGameObjectWithTag("StaticCamera").GetComponent<ResetStaticCamera>();
         }
 
         void Start()
