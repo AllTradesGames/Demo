@@ -65,6 +65,7 @@ public class ResetStaticCamera : MonoBehaviour
 
         // Adjust game render plane to fit Static Camera's view exactly
         gameRenderPlane.localScale = new Vector3(gameRenderScale, 1f, gameRenderScale / thisCamera.aspect);
+        gameRenderPlane.localRotation = Quaternion.Euler(new Vector3(90f, 180f, 0f));
         gameRenderPlane.localPosition = new Vector3(0f, 0f, (gameRenderScale/2f) / (Mathf.Tan(thisCamera.fieldOfView/2f*Mathf.Rad2Deg)) * 27f); 
         StartCoroutine("ScaleGameRender");       
 
@@ -84,7 +85,7 @@ public class ResetStaticCamera : MonoBehaviour
 
         while(!mark1 && !mark2 && !mark3 && !mark4)
         {
-            gameRenderPlane.localPosition = new Vector3(gameRenderPlane.localPosition.x, gameRenderPlane.localPosition.y, gameRenderPlane.localPosition.z + gameRenderInitialFitSpeed);
+            gameRenderPlane.localPosition = new Vector3(0f, 0f, gameRenderPlane.localPosition.z + gameRenderInitialFitSpeed);
             if(marker1.isVisible)
             {
                 mark1 = true;
